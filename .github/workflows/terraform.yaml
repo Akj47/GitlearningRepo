@@ -1,0 +1,30 @@
+name: Terraform Apply
+
+on:
+  workflow_dispatch:  # Triggers workflow manually
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.2
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AKIAYQYUAYTHYEFJ7CV2 }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.IHn9AxgloB3tSTHYER+icwbwJDY4aRvfBAcjP/nM }}
+          AWS_REGION: ${{ secrets.us-east-2 }}
